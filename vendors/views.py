@@ -38,18 +38,18 @@ class PurchaseOrderDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PurchaseOrderSerializer
 
 class VendorPerformanceView(generics.RetrieveAPIView):
-    queryset = HistoricalPerformance.objects.all()
+    queryset = Vendor.objects.all()
     serializer_class = VendorPerformanceSerializer
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     performance_data = {
-    #         'on_time_delivery_rate': instance.on_time_delivery_rate,
-    #         'quality_rating': instance.quality_rating_avg,
-    #         'response_time': instance.average_response_time,
-    #         'fulfilment_rate': instance.fulfillment_rate
-    #     }
-    #     return Response(performance_data, status=status.HTTP_200_OK)
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        performance_data = {
+            'on_time_delivery_rate': instance.on_time_delivery_rate,
+            'quality_rating': instance.quality_rating_avg,
+            'response_time': instance.average_response_time,
+            'fulfilment_rate': instance.fulfillment_rate
+        }
+        return Response(performance_data, status=status.HTTP_200_OK)
     
     
     
